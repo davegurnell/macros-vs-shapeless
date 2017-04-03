@@ -51,9 +51,18 @@ class RuleSpec extends FreeSpec with Matchers {
   "field" in {
     val rule = Rule.pass[IceCream]
       .field(_.cherries)(Rule.gte(0))
+      .field(_.name)(Rule.nonEmpty)
 
     rule(IceCream("Sundae", 1, false)) should be(Nil)
-    rule(IceCream("Sundae", -1, false)) should be(List(Error("Must be >= 0", "cherries" :: Nil)))
+
+    rule(IceCream("Sundae", -1, false)) should be(List(
+      Error("Must be >= 0", "cherries" :: Nil)
+    ))
+
+    rule(IceCream("", -1, false)) should be(List(
+      Error("Must be >= 0", "cherries" :: Nil),
+      Error("Must be non-empty", "name" :: Nil)
+    ))
   }
 
 }
