@@ -22,10 +22,7 @@ trait Rule[A] {
 }
 
 object Rule {
-  def instance[A](func: A => List[Error]): Rule[A] =
-    value => func(value)
-
-  def pass[A]: Rule[A] =
+  def apply[A]: Rule[A] =
     value => Nil
 
   def gte(target: Int): Rule[Int] =

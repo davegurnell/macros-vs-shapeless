@@ -16,7 +16,9 @@ class Macros(val c: blackbox.Context) {
 
   def accessorName(accessor: Tree): TermName =
     accessor match {
-      case q"($param) => $obj.$name" => name
-      case other => c.abort(c.enclosingPosition, "Argument must be an accessor method.")
+      case q"($param) => $obj.$name" =>
+        name
+      case other =>
+        c.abort(c.enclosingPosition, "Argument must be an accessor method.")
     }
 }

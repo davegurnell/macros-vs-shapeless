@@ -12,7 +12,9 @@ lazy val macros = project.in(file("macros"))
       "org.typelevel"  %% "macro-compat"  % "1.1.1",
       "org.scalatest"  %% "scalatest"     % "3.0.1" % Test
     ),
-    addCompilerPlugin("org.scalamacros" %% "paradise" % "2.1.0" cross CrossVersion.full)
+    initialCommands in (Compile, console) := """
+    |import testdata._
+    """.trim.stripMargin
   )
 
 lazy val shapeless = project.in(file("shapeless"))
@@ -22,7 +24,10 @@ lazy val shapeless = project.in(file("shapeless"))
       "com.chuusai"   %% "shapeless" % "2.3.2",
       "org.scalatest" %% "scalatest" % "3.0.1" % Test
     ),
-    scalacOptions += "-Yliteral-types"
+    scalacOptions += "-Yliteral-types",
+    initialCommands in (Compile, console) := """
+    |import testdata._
+    """.trim.stripMargin
   )
 
 lazy val root = project.in(file("."))

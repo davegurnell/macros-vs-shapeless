@@ -15,7 +15,6 @@ trait HasField[A, K, B] {
 }
 
 object HasField {
-
   implicit def recordHasField[L <: HList, K, F](
     implicit
     ev: K <:< Symbol,
@@ -37,5 +36,4 @@ object HasField {
       val name = hasField.name
       def zoom(value: A): F = hasField.zoom(generic.to(value))
     }
-
 }
